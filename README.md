@@ -2,7 +2,7 @@
 
 Practical implementations and comparative studies of foundational machine learning algorithms applied to synthetic and structured real-world datasets.
 
-This repository organizes laboratory works exploring core predictive modeling techniques: regression, probabilistic classification, and linear classification with regularization.
+This repository organizes laboratory works exploring core predictive modeling techniques: regression, probabilistic classification, regularized linear classification, and ensemble learning.
 
 ---
 
@@ -48,6 +48,32 @@ This repository organizes laboratory works exploring core predictive modeling te
 
 ---
 
+### [04. Random Forest Ensemble — Loan Default Risk Assessment](./04_random_forest_classification)
+* **Task:** Binary risk classification to evaluate loan default probability from applicant financial indicators.
+* **Features:** Credit score, annual income, loan amount, debt-to-income ratio, employment duration, and past delinquency history.
+* **Technique:** `sklearn.ensemble.RandomForestClassifier` (100 trees, Out-of-Bag scoring) benchmarked against a baseline `DecisionTreeClassifier`.
+* **Key Findings:**
+  * Ensemble learning reduced variance: Random Forest boosted ROC-AUC from **0.6442** (single tree) to **0.7255**, and Precision from **60.0%** to **83.33%**.
+  * Out-of-Bag (OOB) accuracy stabilized around ~80.2% as estimator count exceeded 50 trees.
+  * Gini feature importance identified `credit_score` (30.1%) and `debt_to_income` (23.5%) as the dominant credit risk determinants.
+* **Artifacts:**
+  * [random_forest_loan_risk.ipynb](./04_random_forest_classification/random_forest_loan_risk.ipynb)
+  * [data.csv](./04_random_forest_classification/data.csv)
+  * [confusion_and_roc.png](./04_random_forest_classification/confusion_and_roc.png)
+
+---
+
+## 📈 Model Comparison Summary
+
+| Module | Algorithm | Problem Type | Primary Metric | Baseline / Comparison |
+|---|---|---|:---:|:---:|
+| **01. Salary Prediction** | Linear Regression (OLS) | Regression | $R^2 = 0.8926$ | Mean baseline ($R^2 = 0.0$) |
+| **02. Customer Purchases** | Gaussian Naive Bayes | Classification | Accuracy: $78.0\%$ | Class prior split testing |
+| **03. Email Spam Detection** | L2 Logistic Regression | Classification | Accuracy: $89.0\%$, ROC-AUC: $0.942$ | Unscaled baseline |
+| **04. Loan Default Risk** | Random Forest (100 Trees) | Ensemble Classification | ROC-AUC: $0.7255$, Precision: $83.3\%$ | Decision Tree (AUC: $0.6442$) |
+
+---
+
 ## 📁 Repository Structure
 
 ```text
@@ -62,6 +88,10 @@ This repository organizes laboratory works exploring core predictive modeling te
 │   ├── data.csv
 │   ├── confusion_matrix.png
 │   └── email_spam_classification.ipynb
+├── 04_random_forest_classification/
+│   ├── confusion_and_roc.png
+│   ├── data.csv
+│   └── random_forest_loan_risk.ipynb
 ├── requirements.txt
 ├── .gitignore
 └── README.md
